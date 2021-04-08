@@ -25,7 +25,33 @@ For this app you will be able to pull up travel related information for countrie
 1. When search happens country shows up on screen
 1. Give user ability to look at indepth country info by navigating to new screen(showing name, language, currency, required vaccines and travel advisories)
 
-## Stretch Goals:
+# Wireframes
+#### Homepage/Sign-in screen
+![alt text](./Wireframes/home-signin.jpg)
+#### Sign-up screen
+![alt text](./Wireframes/signup-screen.jpg)
+#### Profile Screen
+![alt text](./Wireframes/profile-screen.jpg)
+#### Country Search Screen
+![alt text](./Wireframes/country-search.jpg)
+#### Country Info Screen
+![alt text](./Wireframes/country-info.jpg)
+
+# ERD
+![alt text](./Wireframes/ERD.jpg)
+
+# Routes Inventory
+VERB | PATH | SUMMARY
+-----|----------|----------------
+POST | user/new | create new user
+POST | user/login | allows user to log in
+GET | user/login/saved-countries | pulls saved country and saves to user profile
+POST | /country | grabs single country from api
+POST | /country/countryId/userId | adds country to user profile
+
+
+
+# Stretch Goals:
 * allow user to search by more than just by country name(may have to check to see if possible with API)
 * Catergorize their saved searches by region, language etc..
 * Any and all styling beyond clarity and user functionabilty
