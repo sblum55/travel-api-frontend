@@ -38,6 +38,7 @@ logoutLink.addEventListener('click', () => {
 })
 
 searchLink.addEventListener('click', () => {
+    console.log('clicked search link');
     searchContainer.classList.remove('hidden')
     navBar.classList.remove('hidden')
     logInContainer.classList.add('hidden')
@@ -119,7 +120,7 @@ signupForm.addEventListener('submit', async (event) => {
 })
 
 loginForm.addEventListener('submit', async (event) => {
-    // console.log("it clicked");
+    console.log("it clicked");
     event.preventDefault()
 
     const email = document.querySelector('#login-email').value
@@ -145,25 +146,33 @@ loginForm.addEventListener('submit', async (event) => {
 })
 
 searchCountry.addEventListener('submit', async (event) => {
+    console.log('you made it here');
     event.preventDefault()
 
-    const countryName = document.querySelector('#cSearchField')
+    const countryName = document.querySelector('#cSearchField').value
+    console.log(countryName);
 
     try{
-        const response = await axios.post(`${url}countries/${countryName.value}`, {
-            countryName: countryName.value
+        const response = await axios.get(`${url}countries/${countryName}`, {
+            //'country' is the new variable we are defining from countryName and sending to backend
+            country: countryName
         })
         console.log(response);
 
         countryResults.classList.remove('hidden')
         document.querySelector('.cName').innerHTML = `Name: ${response.data.names.name}`
-        document.querySelector('.language').innerHTML = `Official Language: ${repsonse.data.language[1].language}`
-        document.querySelector('.currency').innerHTML = `Official Currency: ${repsonse.data.currency.name}`
-        document.querySelector('.vaccines').innerHTML = `Vaccines to Consider: ${repsonse.data.vaccinations[0]}`
-        document.querySelector('.travelAdvisory').innerHTML = `Travel Advisory(s): ${repsonse.data.advise.UA.advise}`
+        // countryResults.classList.remove('hidden')
+        // document.querySelector('.language').innerHTML = `Official Language: ${repsonse.data.language[0].language}`
+        // countryResults.classList.remove('hidden')
+        // document.querySelector('.currency').innerHTML = `Official Currency: ${repsonse.data.currency.name}`
+        // countryResults.classList.remove('hidden')
+        // document.querySelector('.vaccines').innerHTML = `Vaccines to Consider: ${repsonse.data.vaccinations[0]}`
+        // countryResults.classList.remove('hidden')
+        // document.querySelector('.travelAdvisory').innerHTML = `Travel Advisory(s): ${repsonse.data.advise.UA.advise}`
 
 
     }catch (error) {
+        console.log(error);
         alert('country not available')
     }
 })
