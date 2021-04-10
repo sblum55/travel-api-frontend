@@ -18,6 +18,9 @@ const profileLink = document.querySelector('#profile-link')
 const searchLink = document.querySelector('#search-link')
 const logoutLink = document.querySelector('#logout-link')
 
+//Buttons
+const addCtryBtn = document.querySelector('.addCountry')
+
 //Server access
 const url = 'http://localhost:3001/'
 
@@ -166,7 +169,7 @@ searchCountry.addEventListener('submit', async (event) => {
         countryResults.classList.remove('hidden')
         document.querySelector('.currency').innerHTML = `Official Currency: ${response.data.currency.name}`
         countryResults.classList.remove('hidden')
-        
+
         for(let i = 0; i < response.data.vaccinations.length; i++) {
             let name = response.data.vaccinations[i].name
             let message = response.data.vaccinations[i].message
@@ -183,10 +186,34 @@ searchCountry.addEventListener('submit', async (event) => {
 
         // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise[0].ua.advise}`
 
-        document.querySelector('.saveSearch').classList.remove('.hidden')
+        document.querySelector('.saveSearch').classList.remove('hidden')
 
     }catch (error) {
         console.log(error);
         alert('country not available')
     }
 })
+
+function saveCountry(data) {
+    addCtryBtn.addEventListener('click', async (event) => {
+        console.log('it clicked');
+        event.preventDefault()
+
+        try{
+            let userId = localStorage.getItem('userLogin')
+            console.log(userId);
+            const response = await axios.post(`${url}countries/${data.name}/${userId}`, {
+                params: {
+                    userId: userLogin,
+                    countryId: data.id
+                }
+            })
+            console.log(response);
+            res.json(response)
+        }catch (error) {
+            console.log(error);
+            alert('did not save country')
+        }
+    })
+}
+saveCountry()
