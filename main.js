@@ -161,15 +161,29 @@ searchCountry.addEventListener('submit', async (event) => {
 
         countryResults.classList.remove('hidden')
         document.querySelector('.cName').innerHTML = `Name: ${response.data.names.name}`
-        // countryResults.classList.remove('hidden')
-        // document.querySelector('.language').innerHTML = `Official Language: ${repsonse.data.language[0].language}`
-        // countryResults.classList.remove('hidden')
-        // document.querySelector('.currency').innerHTML = `Official Currency: ${repsonse.data.currency.name}`
-        // countryResults.classList.remove('hidden')
-        // document.querySelector('.vaccines').innerHTML = `Vaccines to Consider: ${repsonse.data.vaccinations[0]}`
-        // countryResults.classList.remove('hidden')
-        // document.querySelector('.travelAdvisory').innerHTML = `Travel Advisory(s): ${repsonse.data.advise.UA.advise}`
+        countryResults.classList.remove('hidden')
+        document.querySelector('.language').innerHTML = `Official Language: ${response.data.language[0].language}`
+        countryResults.classList.remove('hidden')
+        document.querySelector('.currency').innerHTML = `Official Currency: ${response.data.currency.name}`
+        countryResults.classList.remove('hidden')
+        
+        for(let i = 0; i < response.data.vaccinations.length; i++) {
+            let name = response.data.vaccinations[i].name
+            let message = response.data.vaccinations[i].message
+            document.querySelector('.vaccines').innerHTML += `${name}- ${message}<br/>`
+            // console.log(name, message);
+        }
 
+
+        // for(let i = 0; i < response.data.advise.length; i++) {
+        //     let advise= response.data.advise[i]
+        //     document.querySelector('.vaccines').innerHTML += `Current Advisories: ${advise}`
+        //     console.log(advise);
+        // }
+
+        // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise[0].ua.advise}`
+
+        document.querySelector('.saveSearch').classList.remove('.hidden')
 
     }catch (error) {
         console.log(error);
