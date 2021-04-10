@@ -1,0 +1,29 @@
+{
+  "name": "travel-api-frontend",
+  "version": "1.0.0",
+  "description": "### Summary: For this app you will be able to pull up travel related information for countries the user is interested in travelling to. They will able to save any countries they like in order to have easy access to them. This app will make it easier to find a lot of the information you need to make well informed travel desecions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sblum55/travel-api-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sblum55/travel-api-frontend/issues"
+  },
+  "homepage": "https://github.com/sblum55/travel-api-frontend#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.5.1",
+    "rowdy-logger": "^1.0.2",
+    "sequelize": "^6.6.2"
+  }
+}

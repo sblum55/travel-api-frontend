@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>Well Informed Traveller</title>
+</head>
+<body>
+    <div class="navContainer hidden">
+        <li id="home-link"><a href="#">Home</a></li>
+        <li id="profile-link"><a href="#">Profile</a></li>
+        <li id="search-link"><a href="#">Search Countries</a></li>
+        <li id="logout-link"><a href="#">Log Out</a></li>
+    </div>
+
+<div class="loginContainer hidden">
+    <form id="loginForm">
+        <label for="login-email">Email</label>
+        <input type="text" id="login-email">
+
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password">
+
+        <input type="submit" value="Log In!">
+    </form>
+    <div class="signup-link">
+        <h3>Not a member? Sign Up Now!</h3>
+        <button id="signupBtn">Go to Form!</button>
+    </div>
+</div>
+<div class="signupContainer hidden">
+    <form id="signupForm">
+        <label for="signup-name">Name</label>
+        <input type="text" id="signup-name">
+
+        <label for="signup-email">Email</label>
+        <input type="text" id="signup-email">
+
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password">
+
+        <input type="submit" value="Join Now!">
+    </form>
+</div>
+<div class="profileContainer hidden">
+    <h1 id="welcomeMessage">Profile</h1>
+</div>
+<div class="searchContainer hidden">
+    <h1>Find Your Next Vacation Destination!</h1>
+    <div class="searchFormContainer">
+        <form id="searchCountry">
+            <p> Enter Country Name Below:</p>
+            <input type="text" id="cSearchField">
+            <input type="submit" value="Find Country">
+        </form>
+    </div>
+    <div class="countryResults hidden">
+        <h3 class="cName"></h3>
+        <p class="language"></p>
+        <p class="currency"></p>
+        <p class="vaccines"></p>
+        <p class="travelAdvisory"></p>
+    </div>
+</div>
+
+<script async defer src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js "></script>
+<script async defer src="./main.js"></script>   
+</body>
+</html>

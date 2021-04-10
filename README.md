@@ -43,11 +43,11 @@ For this app you will be able to pull up travel related information for countrie
 # Routes Inventory
 VERB | PATH | SUMMARY
 -----|----------|----------------
-POST | user/new | create new user
+POST | /user | create new user
 POST | user/login | allows user to log in
-GET | user/login/saved-countries | pulls saved country and saves to user profile
-POST | /country | grabs single country from api
-POST | /country/countryId/userId | adds country to user profile
+GET | user/saved-countries | pulls saved country & shows on profile screen
+GET | /:{countryName} | grabs single country from api
+POST | /country/countryId | adds country to user profile
 
 
 
