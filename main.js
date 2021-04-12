@@ -24,7 +24,7 @@ const addCtryBtn = document.querySelector('.addCountry')
 let countryId = null
 
 //Server access
-const url = 'http://localhost:3001/'
+const url = 'https://well-informed-traveller.herokuapp.com/'
 
 //Load on screen
 const atHomeScreen = () => {
