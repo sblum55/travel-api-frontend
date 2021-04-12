@@ -63,9 +63,9 @@ homeLink.addEventListener('click', () => {
 
 
 //Accessing visibilty to screens
-// const showNav = () => {
-//     navBar.classList.remove('hidden')
-// }
+const showNav = () => {
+    navBar.classList.remove('hidden')
+}
 
 showSignUp.addEventListener('click', (event) => {
     event.preventDefault()
@@ -81,7 +81,7 @@ const showProfile = () => {
     navBar.classList.remove('hidden')
     logInContainer.classList.add('hidden')
     signupContainer.classList.add('hidden')
-    searchContainer.classList.add('.hidden')
+    searchContainer.classList.add('hidden')
 
 }
 
@@ -109,21 +109,22 @@ signupForm.addEventListener('submit', async (event) => {
         })
 
         const userId = response.data.user.id
-        console.log(userId);
+        // console.log(userId);
         localStorage.setItem('userId', userId)
         const userName = response.data.user.name
         localStorage.setItem('userName', userName)
 
         showProfile()
+        showNav()
 
     }catch (error) {
-        console.log(error);
+        // console.log(error);
         alert('user already exist')
     }
 })
 
 loginForm.addEventListener('submit', async (event) => {
-    console.log("it clicked");
+    // console.log("it clicked");
     event.preventDefault()
 
     const email = document.querySelector('#login-email').value
@@ -137,11 +138,12 @@ loginForm.addEventListener('submit', async (event) => {
 
         console.log(response);
 
-        const userLogin = response.data.user.id
-        console.log(userLogin);
-        localStorage.setItem('userLogin', userLogin)
+        const userId = response.data.user.id
+        // console.log(userLogin);
+        localStorage.setItem('userId', userId)
 
         showProfile()
+        showNav()
 
     }catch (error) {
         alert('login failed')
@@ -149,7 +151,7 @@ loginForm.addEventListener('submit', async (event) => {
 })
 
 searchCountry.addEventListener('submit', async (event) => {
-    console.log('you made it here');
+    // console.log('you made it here');
     event.preventDefault()
 
     const countryName = document.querySelector('#cSearchField').value
@@ -158,18 +160,23 @@ searchCountry.addEventListener('submit', async (event) => {
     try{
         const response = await axios.get(`${url}countries/${countryName}`, {
             //'country' is the new variable we are defining from countryName and sending to backend
-            country: countryName
+            headers: {
+                country: countryName
+            }
         })
-        console.log(response);
+        // console.log(response.data, 'got data');
+        // console.log(Object.keys(response.data), 'these are the keys');
 
         countryResults.classList.remove('hidden')
         document.querySelector('.cName').innerHTML = `Name: ${response.data.names.name}`
+        
         countryResults.classList.remove('hidden')
         document.querySelector('.language').innerHTML = `Official Language: ${response.data.language[0].language}`
+        
         countryResults.classList.remove('hidden')
         document.querySelector('.currency').innerHTML = `Official Currency: ${response.data.currency.name}`
+        
         countryResults.classList.remove('hidden')
-
         for(let i = 0; i < response.data.vaccinations.length; i++) {
             let name = response.data.vaccinations[i].name
             let message = response.data.vaccinations[i].message
@@ -186,34 +193,40 @@ searchCountry.addEventListener('submit', async (event) => {
 
         // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise[0].ua.advise}`
 
+        const getName = response.data.names.name
+        console.log(getName, 'found country ID');
+        localStorage.setItem('countryId', getName)
+
         document.querySelector('.saveSearch').classList.remove('hidden')
 
+        console.log(response.data, 'main.js 198');
+
+        addCtryBtn.addEventListener('click', addCountryDb(response.data))
+
     }catch (error) {
-        console.log(error);
+        // console.log(error);
         alert('country not available')
     }
 })
 
-function saveCountry(data) {
-    addCtryBtn.addEventListener('click', async (event) => {
+async function addCountryDb(data) {
         console.log('it clicked');
-        event.preventDefault()
+        console.log(data, 'main.js 210');
 
         try{
-            let userId = localStorage.getItem('userLogin')
-            console.log(userId);
-            const response = await axios.post(`${url}countries/${data.name}/${userId}`, {
-                params: {
-                    userId: userLogin,
-                    countryId: data.id
-                }
+            let userId = localStorage.getItem('userId')
+            let countryId = localStorage.getItem('countryId')
+            const response = await axios.post(`${url}countries/${countryId}/${userId}`, {
+                    userId: userId,
+                    countryId: countryId,
+                    data: data
             })
             console.log(response);
-            res.json(response)
+            // res.send(language, currency, vaccines, travelAdvisory)
+
         }catch (error) {
             console.log(error);
             alert('did not save country')
         }
-    })
+
 }
-saveCountry()
