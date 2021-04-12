@@ -96,6 +96,8 @@ const showProfile = () => {
 // }
 
 //Functions to access profile
+
+//Sign Up
 signupForm.addEventListener('submit', async (event) => {
     event.preventDefault()
 
@@ -118,6 +120,7 @@ signupForm.addEventListener('submit', async (event) => {
 
         showProfile()
         showNav()
+        getUserLocations()
 
     }catch (error) {
         // console.log(error);
@@ -125,6 +128,8 @@ signupForm.addEventListener('submit', async (event) => {
     }
 })
 
+
+// Log-in
 loginForm.addEventListener('submit', async (event) => {
     // console.log("it clicked");
     event.preventDefault()
@@ -146,12 +151,14 @@ loginForm.addEventListener('submit', async (event) => {
 
         showProfile()
         showNav()
+        getUserLocations()
 
     }catch (error) {
         alert('login failed')
     }    
 })
 
+// Search for Country
 searchCountry.addEventListener('submit', async (event) => {
     // console.log('you made it here');
     event.preventDefault()
@@ -186,13 +193,6 @@ searchCountry.addEventListener('submit', async (event) => {
             // console.log(name, message);
         }
 
-
-        // for(let i = 0; i < response.data.advise.length; i++) {
-        //     let advise= response.data.advise[i]
-        //     document.querySelector('.vaccines').innerHTML += `Current Advisories: ${advise}`
-        //     console.log(advise);
-        // }
-
         // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise[0].ua.advise}`
 
         const getName = response.data.names.name
@@ -203,8 +203,8 @@ searchCountry.addEventListener('submit', async (event) => {
 
         console.log(response.data, 'main.js 198');
 
-        // addCtryBtn.addEventListener('click', addCountryDb(response.data))
         addCtryBtn.addEventListener('click', () => {addCountryDb(response.data)})
+
 
     }catch (error) {
         // console.log(error);
@@ -212,8 +212,7 @@ searchCountry.addEventListener('submit', async (event) => {
     }
 })
 
-
-
+// Add country to profile/db
 async function addCountryDb(data) {
         console.log('it clicked');
         console.log(data, 'main.js 210');
@@ -233,4 +232,36 @@ async function addCountryDb(data) {
             alert('did not save country')
         }
 
+        showProfile()
+        getUserLocations()
+
+}
+
+// Get user locations
+const getUserLocations = async () => {
+    let userId = localStorage.getItem('userId')
+    let countryContainer = document.querySelector('.profileContainer')
+
+    for(let i = 0; i < response.data.countryId; i++) {
+        const response = await axios.get(`${url}/users/${userId}/${countryId}`)
+        console.log('line 245', response.data);
+
+        let div = document.createElement('div')
+        let h1 = document.createElement('h1')
+        let language = document.createElement('p')
+        let currency = document.createElement('p')
+        let vaccines = document.createElement('li')
+        let travelAdvisory = document.createElement('p')
+
+        language.classList.add('language')
+        language.innerHTML = response.data.language[0].language
+        currency.classList.add('currency')
+        currency.innerHTML = response.data.currency.name
+        vaccines.classList.add('vaccines')
+        travelAdvisory.classList.add('travelAdvisory')
+        div.classList.add('singleCountry')
+        h1.innerHTML = response.data.names.name
+        
+    }
+    countryContainer.append(div)
 }
