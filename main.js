@@ -21,6 +21,8 @@ const logoutLink = document.querySelector('#logout-link')
 //Buttons
 const addCtryBtn = document.querySelector('.addCountry')
 
+let countryId = null
+
 //Server access
 const url = 'http://localhost:3001/'
 
@@ -160,7 +162,7 @@ searchCountry.addEventListener('submit', async (event) => {
     try{
         const response = await axios.get(`${url}countries/${countryName}`, {
             //'country' is the new variable we are defining from countryName and sending to backend
-            headers: {
+            params: {
                 country: countryName
             }
         })
@@ -195,13 +197,14 @@ searchCountry.addEventListener('submit', async (event) => {
 
         const getName = response.data.names.name
         console.log(getName, 'found country ID');
-        localStorage.setItem('countryId', getName)
+        countryId = getName
 
         document.querySelector('.saveSearch').classList.remove('hidden')
 
         console.log(response.data, 'main.js 198');
 
-        addCtryBtn.addEventListener('click', addCountryDb(response.data))
+        // addCtryBtn.addEventListener('click', addCountryDb(response.data))
+        addCtryBtn.addEventListener('click', () => {addCountryDb(response.data)})
 
     }catch (error) {
         // console.log(error);
@@ -209,13 +212,14 @@ searchCountry.addEventListener('submit', async (event) => {
     }
 })
 
+
+
 async function addCountryDb(data) {
         console.log('it clicked');
         console.log(data, 'main.js 210');
-
+        console.log(countryId, 'got countryId');
         try{
             let userId = localStorage.getItem('userId')
-            let countryId = localStorage.getItem('countryId')
             const response = await axios.post(`${url}countries/${countryId}/${userId}`, {
                     userId: userId,
                     countryId: countryId,
