@@ -87,16 +87,6 @@ const showProfile = () => {
 
 }
 
-// const showSearch = () => {
-//     searchContainer.classList.remove('hidden')
-//     navBar.classList.remove('hidden')
-//     logInContainer.classList.add('hidden')
-//     signupContainer.classList.add('hidden')
-//     profileContainer.classList.add('hidden')
-// }
-
-//Functions to access profile
-
 //Sign Up
 signupForm.addEventListener('submit', async (event) => {
     event.preventDefault()
@@ -113,7 +103,6 @@ signupForm.addEventListener('submit', async (event) => {
         })
 
         const userId = response.data.user.id
-        // console.log(userId);
         localStorage.setItem('userId', userId)
         const userName = response.data.user.name
         localStorage.setItem('userName', userName)
@@ -123,7 +112,6 @@ signupForm.addEventListener('submit', async (event) => {
         getUserLocations()
 
     }catch (error) {
-        // console.log(error);
         alert('user already exist')
     }
 })
@@ -131,7 +119,6 @@ signupForm.addEventListener('submit', async (event) => {
 
 // Log-in
 loginForm.addEventListener('submit', async (event) => {
-    // console.log("it clicked");
     event.preventDefault()
 
     const email = document.querySelector('#login-email').value
@@ -146,8 +133,9 @@ loginForm.addEventListener('submit', async (event) => {
         console.log(response);
 
         const userId = response.data.user.id
-        // console.log(userLogin);
         localStorage.setItem('userId', userId)
+        const userName = response.data.user.name
+        localStorage.setItem('userName', userName)
 
         showProfile()
         showNav()
@@ -187,7 +175,6 @@ searchCountry.addEventListener('submit', async (event) => {
             let name = response.data.vaccinations[i].name
             let message = response.data.vaccinations[i].message
             document.querySelector('.searchVaccines').innerHTML += `${name}- ${message}<br/>`
-            // console.log(name, message);
         }
 
         // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise.advise}`
@@ -215,7 +202,6 @@ async function addCountryDb(data) {
                     data: data
             })
             console.log(response);
-            // res.send(language, currency, vaccines, travelAdvisory)
 
         }catch (error) {
             console.log(error);
@@ -227,37 +213,47 @@ async function addCountryDb(data) {
 
 }
 
-// Get user locations
+// Get Users Saved Locations
 const getUserLocations = async () => {
-    // console.log('here: line 232');
     let userId = localStorage.getItem('userId')
+    let userName = localStorage.getItem('userName')
     let countryContainer = document.querySelector('.profileContainer')
-    // console.log('get user id frontend', userId);
+    while(countryContainer.firstChild) {
+        countryContainer.firstChild.remove()
+    }
     try {
         const response = await axios.get(`${url}users/${userId}/savedCountries`)
         console.log('line 238', response.data);
-        response.data.savedCountries.forEach(ctry => {
+        response.data.countries.forEach(ctry => {
             let savedCountries = document.createElement('div')
-            let h1 = document.createElement('h1')
+            let countryName = document.createElement('h2')
             let language = document.createElement('p')
             let currency = document.createElement('p')
             let vaccines = document.createElement('li')
-            let travelAdvisory = document.createElement('p')
+            // let travelAdvisory = document.createElement('p')
     
-            language.classList.add('language')
-            language.innerHTML = ctry.language[0].language
-            currency.classList.add('currency')
-            currency.innerHTML = ctry.currency.name
-            vaccines.classList.add('vaccines')
-            travelAdvisory.classList.add('travelAdvisory')
-            div.classList.add('singleCountry')
-            h1.innerHTML = ctry.names.name
+            countryName.classList.add('countryName')
+            countryName.innerHTML = ctry.name
+            savedCountries.append(countryName)
 
+            language.classList.add('language')
+            language.innerHTML = ctry.language
+            savedCountries.append(language)
+
+            currency.classList.add('currency')
+            currency.innerHTML = ctry.currency && ctry.currency
+            savedCountries.append(currency)
+
+            // travelAdvisory.classList.add('travelAdvisory')
+            // travelAdvisory.innerHTML = ctry.names.name
+
+            savedCountries.classList.add('savedCountries')
             countryContainer.append(savedCountries)
+
         })
-            console.log('line 240 frontend', countries);
             
         }catch (error) {
+            console.log(error);
         alert('no saved cities')
     }
 
