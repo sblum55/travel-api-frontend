@@ -24,7 +24,7 @@ const addCtryBtn = document.querySelector('.addCountry')
 let countryId = null
 
 //Server access
-const url = 'https://well-informed-traveller.herokuapp.com/'
+const url = 'http://localhost:3001/'
 
 //Load on screen
 const atHomeScreen = () => {
@@ -160,7 +160,6 @@ loginForm.addEventListener('submit', async (event) => {
 
 // Search for Country
 searchCountry.addEventListener('submit', async (event) => {
-    // console.log('you made it here');
     event.preventDefault()
 
     const countryName = document.querySelector('#cSearchField').value
@@ -173,8 +172,6 @@ searchCountry.addEventListener('submit', async (event) => {
                 country: countryName
             }
         })
-        // console.log(response.data, 'got data');
-        // console.log(Object.keys(response.data), 'these are the keys');
 
         countryResults.classList.remove('hidden')
         document.querySelector('.cName').innerHTML = `Name: ${response.data.names.name}`
@@ -196,27 +193,20 @@ searchCountry.addEventListener('submit', async (event) => {
         // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise[0].ua.advise}`
 
         const getName = response.data.names.name
-        console.log(getName, 'found country ID');
         countryId = getName
 
         document.querySelector('.saveSearch').classList.remove('hidden')
-
-        console.log(response.data, 'main.js 198');
 
         addCtryBtn.addEventListener('click', () => {addCountryDb(response.data)})
 
 
     }catch (error) {
-        // console.log(error);
         alert('country not available')
     }
 })
 
 // Add country to profile/db
 async function addCountryDb(data) {
-        console.log('it clicked');
-        console.log(data, 'main.js 210');
-        console.log(countryId, 'got countryId');
         try{
             let userId = localStorage.getItem('userId')
             const response = await axios.post(`${url}countries/${countryId}/${userId}`, {
@@ -238,30 +228,37 @@ async function addCountryDb(data) {
 }
 
 // Get user locations
-const getUserLocations = async () => {
+const getUserLocations = async (data) => {
+    // console.log('here: line 232');
     let userId = localStorage.getItem('userId')
     let countryContainer = document.querySelector('.profileContainer')
+    // console.log('get user id frontend', userId);
+    try {
+        for (countries of data) {
+            const response = await axios.get(`${url}/users/${userId}/savedCountries`)
+            console.log('line 249', response.data);
+    
+            let savedCountries = document.createElement('div')
+            let h1 = document.createElement('h1')
+            let language = document.createElement('p')
+            let currency = document.createElement('p')
+            let vaccines = document.createElement('li')
+            let travelAdvisory = document.createElement('p')
+    
+            language.classList.add('language')
+            language.innerHTML = response.data.language[0].language
+            currency.classList.add('currency')
+            currency.innerHTML = response.data.currency.name
+            vaccines.classList.add('vaccines')
+            travelAdvisory.classList.add('travelAdvisory')
+            div.classList.add('singleCountry')
+            h1.innerHTML = response.data.names.name
 
-    for(let i = 0; i < response.data.countryId; i++) {
-        const response = await axios.get(`${url}/users/${userId}/${countryId}`)
-        console.log('line 245', response.data);
+            countryContainer.append(savedCountries)
+        }
 
-        let div = document.createElement('div')
-        let h1 = document.createElement('h1')
-        let language = document.createElement('p')
-        let currency = document.createElement('p')
-        let vaccines = document.createElement('li')
-        let travelAdvisory = document.createElement('p')
-
-        language.classList.add('language')
-        language.innerHTML = response.data.language[0].language
-        currency.classList.add('currency')
-        currency.innerHTML = response.data.currency.name
-        vaccines.classList.add('vaccines')
-        travelAdvisory.classList.add('travelAdvisory')
-        div.classList.add('singleCountry')
-        h1.innerHTML = response.data.names.name
-        
+        }catch (error) {
+        alert('no saved cities')
     }
-    countryContainer.append(div)
+
 }
