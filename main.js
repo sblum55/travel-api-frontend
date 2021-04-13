@@ -223,26 +223,35 @@ const getUserLocations = async () => {
     }
     try {
         const response = await axios.get(`${url}users/${userId}/savedCountries`)
-        console.log('line 238', response.data);
+        console.log('line 226', response.data);
         response.data.countries.forEach(ctry => {
             let savedCountries = document.createElement('div')
             let countryName = document.createElement('h2')
             let language = document.createElement('p')
             let currency = document.createElement('p')
-            let vaccines = document.createElement('li')
+            let vaccines = document.createElement('ul')
             // let travelAdvisory = document.createElement('p')
     
             countryName.classList.add('countryName')
-            countryName.innerHTML = ctry.name
+            countryName.innerHTML = ctry.country.name
             savedCountries.append(countryName)
 
             language.classList.add('language')
-            language.innerHTML = ctry.language
+            language.innerHTML = ctry.country.language
             savedCountries.append(language)
 
             currency.classList.add('currency')
-            currency.innerHTML = ctry.currency && ctry.currency
+            currency.innerHTML = ctry.country.currency && ctry.country.currency
             savedCountries.append(currency)
+
+            vaccines.classList.add('vaccines')
+            ctry.vaccines.forEach(vacs => {
+                let vaccine = document.createElement('li')
+                vaccine.classList.add('vaccineLists')
+                vaccine.innerText = `Name: ${vacs.name}- ${vacs.message}`
+                vaccines.append(vaccine)
+            })
+            savedCountries.append(vaccines)
 
             // travelAdvisory.classList.add('travelAdvisory')
             // travelAdvisory.innerHTML = ctry.names.name

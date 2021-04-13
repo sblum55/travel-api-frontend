@@ -259,10 +259,16 @@ label {
     box-shadow: 0 0 3rem rgb(0, 0, 0, 20%);
 }
 
+.profileContainer {
+    margin-left: 200px;
+}
+
 .savedCountries {
     border: black solid 2px;
+    background-color: #ffeddf;
     box-sizing: border-box;
     margin: 5px;
     width: 40%;
     float: left;
+    box-shadow: 0 0 3rem rgb(0, 0, 0, 20%);
 }
