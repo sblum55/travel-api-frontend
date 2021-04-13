@@ -174,23 +174,23 @@ searchCountry.addEventListener('submit', async (event) => {
         })
 
         countryResults.classList.remove('hidden')
-        document.querySelector('.cName').innerHTML = `Name: ${response.data.names.name}`
+        document.querySelector('.searchName').innerHTML = `${response.data.names.name}`
         
         countryResults.classList.remove('hidden')
-        document.querySelector('.language').innerHTML = `Official Language: ${response.data.language[0].language}`
+        document.querySelector('.searchLanguage').innerHTML = `Official Language: ${response.data.language[0].language}`
         
         countryResults.classList.remove('hidden')
-        document.querySelector('.currency').innerHTML = `Official Currency: ${response.data.currency.name}`
+        document.querySelector('.searchCurrency').innerHTML = `Official Currency: ${response.data.currency.name}`
         
         countryResults.classList.remove('hidden')
         for(let i = 0; i < response.data.vaccinations.length; i++) {
             let name = response.data.vaccinations[i].name
             let message = response.data.vaccinations[i].message
-            document.querySelector('.vaccines').innerHTML += `${name}- ${message}<br/>`
+            document.querySelector('.searchVaccines').innerHTML += `${name}- ${message}<br/>`
             // console.log(name, message);
         }
 
-        // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise[0].ua.advise}`
+        // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise.advise}`
 
         const getName = response.data.names.name
         countryId = getName
@@ -228,16 +228,15 @@ async function addCountryDb(data) {
 }
 
 // Get user locations
-const getUserLocations = async (data) => {
+const getUserLocations = async () => {
     // console.log('here: line 232');
     let userId = localStorage.getItem('userId')
     let countryContainer = document.querySelector('.profileContainer')
     // console.log('get user id frontend', userId);
     try {
-        for (countries of data) {
-            const response = await axios.get(`${url}/users/${userId}/savedCountries`)
-            console.log('line 249', response.data);
-    
+        const response = await axios.get(`${url}users/${userId}/savedCountries`)
+        console.log('line 238', response.data);
+        response.data.savedCountries.forEach(ctry => {
             let savedCountries = document.createElement('div')
             let h1 = document.createElement('h1')
             let language = document.createElement('p')
@@ -246,17 +245,18 @@ const getUserLocations = async (data) => {
             let travelAdvisory = document.createElement('p')
     
             language.classList.add('language')
-            language.innerHTML = response.data.language[0].language
+            language.innerHTML = ctry.language[0].language
             currency.classList.add('currency')
-            currency.innerHTML = response.data.currency.name
+            currency.innerHTML = ctry.currency.name
             vaccines.classList.add('vaccines')
             travelAdvisory.classList.add('travelAdvisory')
             div.classList.add('singleCountry')
-            h1.innerHTML = response.data.names.name
+            h1.innerHTML = ctry.names.name
 
             countryContainer.append(savedCountries)
-        }
-
+        })
+            console.log('line 240 frontend', countries);
+            
         }catch (error) {
         alert('no saved cities')
     }
