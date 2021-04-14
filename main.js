@@ -211,9 +211,10 @@ async function addCountryDb(data) {
 
 }
 
-// let deleteCountry = async (countryId) => {
+//FUTURE ADD-ON
+// let deleteCountry = async () => {
 //     let userId = localStorage.getItem('userId')
-//     let response = await axios.delete(`${url}users/${userId}/delete/${countryId}`)
+//     let response = await axios.delete(`${url}users/${userId}/delete`)
 //     console.log(response);
 // }
 
@@ -254,6 +255,7 @@ const getUserLocations = async () => {
             vaccineTitle.innerHTML = `<b>Vaccines to Consider<b>`
             savedCountries.append(vaccineTitle)
 
+            vaccines.innerHTML = ''
             vaccines.classList.add('vaccines')
             ctry.vaccines.forEach(vacs => {
                 let vaccine = document.createElement('li')
@@ -262,6 +264,13 @@ const getUserLocations = async () => {
                 vaccines.append(vaccine)
             })
             savedCountries.append(vaccines)
+
+            // deleteButton.innerHTML = 'delete'
+            // deleteButton.addEventListener('click', (event) => {
+            //     event.preventDefault()
+            //     deleteCountry()
+            // })
+            // savedCountries.append(deleteButton)
 
             savedCountries.classList.add('savedCountries')
             countryContainer.append(savedCountries)
