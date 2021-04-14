@@ -165,19 +165,17 @@ searchCountry.addEventListener('submit', async (event) => {
         document.querySelector('.searchName').innerHTML = `${response.data.names.name}`
         
         countryResults.classList.remove('hidden')
-        document.querySelector('.searchLanguage').innerHTML = `Official Language: ${response.data.language[0].language}`
+        document.querySelector('.searchLanguage').innerHTML = `<b>Official Language:</b><br/> ${response.data.language[0].language}`
         
         countryResults.classList.remove('hidden')
-        document.querySelector('.searchCurrency').innerHTML = `Official Currency: ${response.data.currency.name}`
+        document.querySelector('.searchCurrency').innerHTML = `<b>Official Currency:</b><br/> ${response.data.currency.name}`
         
         countryResults.classList.remove('hidden')
         for(let i = 0; i < response.data.vaccinations.length; i++) {
             let name = response.data.vaccinations[i].name
             let message = response.data.vaccinations[i].message
-            document.querySelector('.searchVaccines').innerHTML += `${name}- ${message}<br/>`
+            document.querySelector('.searchVaccines').innerHTML += `<b>${name}</b>- ${message}<br/>`
         }
-
-        // document.querySelector('.travelAdvisory').innerHTML = `Current Advisory: ${response.data.advise.advise}`
 
         const getName = response.data.names.name
         countryId = getName
@@ -213,6 +211,12 @@ async function addCountryDb(data) {
 
 }
 
+// let deleteCountry = async (countryId) => {
+//     let userId = localStorage.getItem('userId')
+//     let response = await axios.delete(`${url}users/${userId}/delete/${countryId}`)
+//     console.log(response);
+// }
+
 // Get Users Saved Locations
 const getUserLocations = async () => {
     let userId = localStorage.getItem('userId')
@@ -229,7 +233,9 @@ const getUserLocations = async () => {
             let countryName = document.createElement('h2')
             let language = document.createElement('p')
             let currency = document.createElement('p')
+            let vaccineTitle = document.createElement('p')
             let vaccines = document.createElement('ul')
+            // let deleteButton = document.createElement('button')
             // let travelAdvisory = document.createElement('p')
     
             countryName.classList.add('countryName')
@@ -237,24 +243,25 @@ const getUserLocations = async () => {
             savedCountries.append(countryName)
 
             language.classList.add('language')
-            language.innerHTML = ctry.country.language
+            language.innerHTML = `<b>Language:</b><br/> ${ctry.country.language}`
             savedCountries.append(language)
 
             currency.classList.add('currency')
-            currency.innerHTML = ctry.country.currency && ctry.country.currency
+            currency.innerHTML = `<b>Currency:</b><br/> ${ctry.country.currency && ctry.country.currency}`
             savedCountries.append(currency)
+
+            vaccineTitle.classList.add('vaccineTitle')
+            vaccineTitle.innerHTML = `<b>Vaccines to Consider<b>`
+            savedCountries.append(vaccineTitle)
 
             vaccines.classList.add('vaccines')
             ctry.vaccines.forEach(vacs => {
                 let vaccine = document.createElement('li')
                 vaccine.classList.add('vaccineLists')
-                vaccine.innerText = `Name: ${vacs.name}- ${vacs.message}`
+                vaccine.innerText = `${vacs.name}- ${vacs.message}`
                 vaccines.append(vaccine)
             })
             savedCountries.append(vaccines)
-
-            // travelAdvisory.classList.add('travelAdvisory')
-            // travelAdvisory.innerHTML = ctry.names.name
 
             savedCountries.classList.add('savedCountries')
             countryContainer.append(savedCountries)

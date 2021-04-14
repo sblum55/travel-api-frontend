@@ -11,7 +11,6 @@ For this app you will be able to pull up travel related information for countrie
 * If the user is in their profile they either select search for more countries, look at any saved countries or log-out
 * If the user clicks on the search for more countries button they will be taken to the search screen
 * In the search screen the user can search by country and the countries info will show up below
-* If the user choose to look at their saved countries info they will be taken to a page with full details of countries travel info
 * Their will be a nav bar after log-in that will allow the user to toggle between home, profile and search screens.
 
 # MVP's
@@ -23,7 +22,6 @@ For this app you will be able to pull up travel related information for countrie
 1. When the user is on their profile they can see all saved countries
 1. Be able to search for country with name
 1. When search happens country shows up on screen
-1. Give user ability to look at indepth country info by navigating to new screen(showing name, language, currency, required vaccines and travel advisories)
 
 # Wireframes
 #### Homepage/Sign-in screen
@@ -34,8 +32,6 @@ For this app you will be able to pull up travel related information for countrie
 ![alt text](./Wireframes/profile-screen.jpg)
 #### Country Search Screen
 ![alt text](./Wireframes/country-search.jpg)
-#### Country Info Screen
-![alt text](./Wireframes/country-info.jpg)
 
 # ERD
 ![alt text](./Wireframes/ERD.jpg)

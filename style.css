@@ -4,22 +4,23 @@
 
 body {
     margin-top: 100px;
-    text-align: center;
 }
 
 h1 {
-    margin-top: 125px;
-    margin-bottom: 75px;
-    font-size: 50px;
+    margin-top: 90px;
+    margin-bottom: 50px;
+    font-size: 75px;
     color: #22031f;
+    text-align: center;
     font-family: 'Courier New', Courier, monospace;
 }
 
 h2 {
     margin-top: 25px;
     margin-bottom: 25px;
-    font-size: 40px;
+    font-size: 50px;
     color: #22031f;
+    text-align: center;
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -39,6 +40,7 @@ p {
     display: flex;
     align-items: center;
     font-family: 'Courier New', Courier, monospace;
+
 }
 
 .navContainer * {
@@ -74,11 +76,38 @@ input {
     border-radius: calc(5.8rem * 0.3);
     box-shadow: 0 0 3rem rgb(0, 0, 0, 20%);
     margin-right: 1em;
+    margin-bottom: 10px;
 }
 
 label {
     margin-right: 1em;
+    font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.loginContainer {
+    display: inline-block;
+    justify-content: center;
+    text-align: center;
+    margin-top: 75px;
+    margin-bottom: 75px;
+    color: white;
+}
+
+#loginForm {
+    display: inline-block;
+    justify-content: center;
+    padding: 50px;
+    margin-top: -20px;
+    background-color: #ff715b;
+    width: 75%;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+#loginBtn:hover {
+    background-color: #22031f;
+    color: white;
 }
 
 #signupBtn {
@@ -95,25 +124,25 @@ label {
     box-shadow: 0 0 3rem rgb(0, 0, 0, 20%);
 }
 
-
-.loginContainer {
-    display: inline;
-    margin-top: 100px;
-    margin-bottom: 75px;
-    color: white;
+#signupBtn:hover {
+    background-color: white;
+    color: #294936;
+    border: #294936 solid 2px;
 }
 
-#loginForm {
-    display: inline;
-    padding: 50px;
-    background-color: #ff715b;
-    width: 60%;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+.signupMessage {
+    background-color: #87b38d;
+    padding: 10px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
     border-radius: 5px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .signupContainer {
     margin-top: 100px;
+    text-align: center;
 }
 
 #signupForm {
@@ -127,6 +156,7 @@ label {
     min-height: 1px;
     background-color: #ff715b;
     border-radius: 5px;
+    text-align: center;
 }
 
 #signup-name {
@@ -175,10 +205,12 @@ label {
     line-height: 1.38;
     text-align: center;
     color: #ffffff;
+    font-size: 20px;
 }
 
 #signupSubmit:hover {
-    background-color: #45a049;
+    background-color: #22031f;
+    color: white;
 }
 
 .searchWords {
@@ -199,11 +231,21 @@ label {
     min-height: 1px;
     background-color: #ff715b;
     border-radius: 5px;
+    text-align: center;
 }
 
 .searchForm {
     padding-bottom: 20px;
     margin-bottom: 30px;
+}
+
+#countrySubmit {
+    text-align: center;
+}
+
+#countrySubmit:hover {
+    background-color: #22031f;
+    color: white;
 }
 
 .countryResults {
@@ -219,29 +261,32 @@ label {
 }
 
 .searchName {
+    text-align: center;
     font-size: 50px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
 }
 
 .searchLanguage{
+    text-align: center;
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .searchCurrency{
+    text-align: center;
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .searchVaccines{
+    padding-left: 20px;
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.searchTravelAdvisory{
-    font-size: 20px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.saveSearch {
+    text-align: center;
 }
 
 .addCountry {
@@ -268,7 +313,29 @@ label {
     background-color: #ffeddf;
     box-sizing: border-box;
     margin: 5px;
-    width: 40%;
+    width: 75%;
     float: left;
     box-shadow: 0 0 3rem rgb(0, 0, 0, 20%);
 }
+
+.language {
+    text-align: center;
+}
+
+.currency {
+    text-align: center;
+}
+
+.vaccineTitle {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.vaccineLists {
+    margin-top: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-decoration: none;
+    font-size: 20px;
+}
+
