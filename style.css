@@ -24,6 +24,15 @@ h2 {
     font-family: 'Courier New', Courier, monospace;
 }
 
+h3 {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 30px;
+    color: #22031f;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;    
+}
+
 p {
     font-size: 20px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -88,6 +97,7 @@ label {
 .loginContainer {
     display: inline-block;
     justify-content: center;
+    align-content: center;
     text-align: center;
     margin-top: 75px;
     margin-bottom: 75px;
@@ -97,6 +107,7 @@ label {
 #loginForm {
     display: inline-block;
     justify-content: center;
+    text-align: center;
     padding: 50px;
     margin-top: -20px;
     background-color: #ff715b;

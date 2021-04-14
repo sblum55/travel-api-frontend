@@ -34,7 +34,7 @@ For this app you will be able to pull up travel related information for countrie
 ![alt text](./Wireframes/country-search.jpg)
 
 # ERD
-![alt text](./Wireframes/ERD.jpg)
+![alt text](./Wireframes/erd-2.jpg)
 
 # Routes Inventory
 VERB | PATH | SUMMARY

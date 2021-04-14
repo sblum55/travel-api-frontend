@@ -237,7 +237,6 @@ const getUserLocations = async () => {
             let vaccineTitle = document.createElement('p')
             let vaccines = document.createElement('ul')
             // let deleteButton = document.createElement('button')
-            // let travelAdvisory = document.createElement('p')
     
             countryName.classList.add('countryName')
             countryName.innerHTML = ctry.country.name
